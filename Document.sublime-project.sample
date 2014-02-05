@@ -1,0 +1,30 @@
+{
+   "folders": [
+      {
+         "path": ".",
+         "file_exclude_patterns":[],
+         "folder_exclude_patterns": [
+            "components",
+            "document",
+            "build",
+            "dist"
+         ]
+      },
+      { 
+         "path": "document",
+         "name": "Document",
+         "file_exclude_patterns":[],
+         "folder_exclude_patterns": []
+      },
+      { 
+         "path": "components",
+         "name": "Components",
+         "file_exclude_patterns":[],
+         "folder_exclude_patterns": []
+      }
+   ],
+   "settings":
+   {
+      "tab_size": 4
+   }
+}
