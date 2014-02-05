@@ -25,7 +25,7 @@ def generate_replacements():
 		if "pos" not in d:
 			d["pos"] = "r"
 		if not args["--strip"]:
-			graphics = "\\includegraphics[width="+d["width"]+"]{figures/"+d["images"][0]+"}"
+			graphics = "\\includegraphics[width="+d["width"]+"]{document/figures/"+d["images"][0]+"}"
 			replacement = ("\\begin{figure*}"+
 							"\\noindent"+graphics+
 							"\\vspace{-5pt}\\caption{"+d["caption"]+"}"+
