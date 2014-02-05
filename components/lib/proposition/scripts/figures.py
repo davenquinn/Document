@@ -18,7 +18,7 @@ import docopt
 args = docopt.docopt(__doc__)
 
 def generate_replacements():
-	with open("figures/figures.json") as f:
+	with open("document/figures.json") as f:
 		data = json.loads(f.read())
 
 	for d in data:
