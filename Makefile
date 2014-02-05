@@ -14,11 +14,11 @@ shrink:
 	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=dist/dquinn_NESSF_grant_proposal_small.pdf _dist/dquinn_NESSF_grant_proposal.pdf
 
 word:
-	components/scripts/figures.py --strip document/text/main.md | \
+	$(THEME)/scripts/figures.py --strip document/text/main.md | \
 	pandoc -t docx --bibliography=$(BIBFILE) --csl=$(THEME)/csl/agu.csl -o dist/dquinn_NESSF_grant_proposal.docx
 
 pandoc:
-	components/scripts/figures.py document/text/main.md | \
+	$(THEME)/scripts/figures.py document/text/main.md | \
 	pandoc -t latex --natbib -o .build/main.tex;\
 
 start: pandoc
@@ -27,7 +27,6 @@ start: pandoc
 final: pandoc
 	echo "Updating Bibliograpy"; \
 	bibtex8 .build/skeleton.aux; \
-	components/journal.py; \
 	xelatex -output-directory .build $(THEME)/latex/skeleton.tex; \
 	mv .build/skeleton.pdf dist/dquinn_NESSF_grant_proposal.pdf;
 
