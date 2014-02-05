@@ -1,0 +1,65 @@
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[paper=letterpaper, margin=1in, nohead, pdftex]{geometry}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\usepackage[small,compact]{titlesec}
+\usepackage{graphicx}			% Nice graphics, optional
+\usepackage{siunitx}
+\usepackage[version=3]{mhchem}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{ifthen}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{paralist}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage[font={footnotesize}]{caption}
+
+\input{lib/naturelike/latex/includes/fonts.tex}
+
+%\setsansfont{Helvetica Neue}
+
+
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+
+\input{lib/naturelike/latex/includes/biblatex.tex}
+\input{lib/naturelike/latex/includes/commands.tex}
+
+
+\setcounter{secnumdepth}{-1}
+% suck up extra white space
+
+\titleformat{\section}{\Gotham\large\bfseries}{\thesection}{0.9em}{}
+\titleformat{\subsection}[runin]{\Gotham\normalsize\bfseries}{\thesubsection}{3pt}{}
+\titleformat{\subsubsection}[runin]{\Gotham\small\bfseries}{\thesubsubsection}{3pt}{}
+
+
+\renewcommand{\bibfont}{\GothamLight\footnotesize}
+%%\setlength{\bibsep}{0pt}
+\setcounter{secnumdepth}{-1}
+
+\begin{document}
+
+\noindent{\Gotham\Large\textbf{A forested periglacial landscape in upper-Pleistocene central Canada from preserved fire scars}}
+
+\noindent{\GothamLight\textbf{Daven P. Quinn}~~~{\footnotesize{California Institute of Technology, Pasadena, California, USA}}}
+\vspace{10pt}
+
+\begin{multicols}{2}
+\input{build/main.tex}
+\end{multicols}
+
+
+\pagebreak
+\begin{multicols}{2}
+\printbibliography
+\end{multicols}
+
+
+
+\end{document}
+

@@ -1,0 +1,53 @@
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[paper=letterpaper, margin=1in, nohead, pdftex]{geometry}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\usepackage{ifthen}
+\usepackage[small,compact]{titlesec}
+\usepackage{graphicx}			% Nice graphics, optional
+\usepackage{siunitx}
+\usepackage[version=3]{mhchem}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{ifthen}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{paralist}
+\usepackage{multicol}
+\usepackage{longtable}
+\usepackage[font={footnotesize}]{caption}
+
+\input{components/lib/proposition/latex/fonts.tex}
+\input{components/lib/proposition/latex/commands.tex}
+\input{components/lib/proposition/latex/natbib.tex}
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+
+\setcounter{secnumdepth}{2}
+
+\titleformat{\section}{\HN\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\HN\normalsize\bfseries}{\thesubsection}{3pt}{}
+\titleformat{\subsubsection}[runin]{\HN\small\bfseries}{\thesubsubsection}{3pt}{}
+
+
+\renewcommand{\bibfont}{\footnotesize}
+\setlength{\bibsep}{0pt}
+
+\begin{document}
+
+\noindent{\large\HN\textbf{Provenance of the sulfate unit at northeast Syrtis Major, Mars via new methods for HiRISE stereo data analysis}}
+\vspace{10pt}
+
+\input{.build/main.tex}
+
+\twocolumn
+
+{\footnotesize
+\bibliography{/Users/Daven/Resources/Papers/BibTeX/library}
+\bibliographystyle{/Users/Daven/Resources/Papers/BibTeX/styles/agu08}
+}
+
+\end{document}
+

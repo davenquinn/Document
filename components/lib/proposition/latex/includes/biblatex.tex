@@ -1,0 +1,56 @@
+% use with biber backend
+
+\usepackage[
+  backend=biber,
+  %style=nature,
+  %autocite=superscript,
+  style=authoryear,
+  url=false,
+  isbn=false,
+  doi=false,
+  firstinits=true
+  ]{biblatex}
+
+\AtEveryBibitem{%
+  \clearfield{day}%
+  \clearfield{month}%
+  \clearfield{endday}%
+  \clearfield{endmonth}%
+}
+
+\addbibresource[datatype=bibtex]{/Users/Daven/Resources/Papers/BibTeX/library.bib}
+
+
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+%Hack for superscript \textcite references
+
+\makeatletter
+\renewbibmacro*{textcite}{%
+  \iffieldequals{namehash}{\cbx@lasthash}
+    {\mkbibsuperscript{\supercitedelim}}
+    {\cbx@tempa
+     \ifnameundef{labelname}
+       {\printfield[citetitle]{labeltitle}}
+       {\printnames{labelname}}}%
+  \ifnumequal{\value{citecount}}{1}
+    {}
+    {}%
+  \mkbibsuperscript{\usebibmacro{cite}}%
+  \savefield{namehash}{\cbx@lasthash}%
+  \gdef\cbx@tempa{\addspace\multicitedelim}}%
+
+\DeclareCiteCommand{\textcite}
+  {\let\cbx@tempa=\empty
+   \undef\cbx@lasthash
+   \iffieldundef{prenote}
+     {}
+     {\BibliographyWarning{Ignoring prenote argument}}%
+   \iffieldundef{postnote}
+     {}
+     {\BibliographyWarning{Ignoring postnote argument}}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{textcite}}
+  {}
+  {}
+\makeatother
+

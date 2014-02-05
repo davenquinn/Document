@@ -1,5 +1,6 @@
-documents
+document
 .build
 dist
 *.sublime-project
 *.sublime-workspace
+data
