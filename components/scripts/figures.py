@@ -18,11 +18,15 @@ import pystache
 
 args = docopt.docopt(__doc__)
 
+def get_config():
+	with open("document/config.json") as f:
+			data = json.loads(f.read())
+
 def generate_replacements():
 	with open("document/figures.json") as f:
 		data = json.loads(f.read())
 
-	with open("components/lib/proposition/tpl/figure.stache") as f:
+	with open("components/lib/{0}/templates/figure.stache".format(theme)) as f:
 		string = f.read()
 		template = lambda x: pystache.render("{{=< >=}}\n"+string, x)
 
