@@ -14,6 +14,7 @@ Options:
 import re
 import json
 import docopt
+import pystache
 
 args = docopt.docopt(__doc__)
 
@@ -21,16 +22,15 @@ def generate_replacements():
 	with open("document/figures.json") as f:
 		data = json.loads(f.read())
 
+	with open("components/lib/proposition/tpl/figure.stache") as f:
+		string = f.read()
+		template = lambda x: pystache.render("{{=< >=}}\n"+string, x)
+
 	for d in data:
 		if "pos" not in d:
 			d["pos"] = "r"
 		if not args["--strip"]:
-			graphics = "\\includegraphics[width="+d["width"]+"]{document/figures/"+d["images"][0]+"}"
-			replacement = ("\\begin{figure*}"+
-							"\\noindent"+graphics+
-							"\\vspace{-5pt}\\caption{"+d["caption"]+"}"+
-							"\\label{fig:"+d["id"]+"}"+
-							"\\end{figure*}\\paragraph{}\\vspace*{-\\parskip}\\vspace*{-\\parsep}")
+			replacement = template(d)
 		else:
 			replacement = ""
 		yield "[[fig:"+d["id"]+"]]", replacement
