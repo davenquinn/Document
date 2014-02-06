@@ -17,7 +17,7 @@
 \usepackage{multicol}
 \usepackage[font={footnotesize}]{caption}
 
-\input{lib/naturelike/latex/includes/fonts.tex}
+\input{components/lib/naturelike/latex/includes/fonts.tex}
 
 %\setsansfont{Helvetica Neue}
 
@@ -26,8 +26,10 @@
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Times New Roman}
 
-\input{lib/naturelike/latex/includes/biblatex.tex}
-\input{lib/naturelike/latex/includes/commands.tex}
+\input{components/lib/naturelike/latex/includes/biblatex.tex}
+\addbibresource{<<references>>}
+
+\input{components/lib/naturelike/latex/includes/commands.tex}
 
 
 \setcounter{secnumdepth}{-1}
@@ -44,13 +46,13 @@
 
 \begin{document}
 
-\noindent{\Gotham\Large\textbf{A forested periglacial landscape in upper-Pleistocene central Canada from preserved fire scars}}
+\noindent{\Gotham\Large\textbf{<<title>>}}
 
-\noindent{\GothamLight\textbf{Daven P. Quinn}~~~{\footnotesize{California Institute of Technology, Pasadena, California, USA}}}
+\noindent{\GothamLight\textbf{<<author>>}~~~{\footnotesize{<<affiliation>>}}}
 \vspace{10pt}
 
 \begin{multicols}{2}
-\input{build/main.tex}
+\input{.build/main.tex}
 \end{multicols}
 
 
