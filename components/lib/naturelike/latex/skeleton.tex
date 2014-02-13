@@ -41,24 +41,24 @@
 
 
 \renewcommand{\bibfont}{\GothamLight\footnotesize}
-%%\setlength{\bibsep}{0pt}
 \setcounter{secnumdepth}{-1}
+\setlength{\parsep}{0pt}
+\setlength{\parskip}{0ex plus 1ex minus 0ex}
+
 
 \begin{document}
 
 \noindent{\Gotham\Large\textbf{<<title>>}}
 
 \noindent{\GothamLight\textbf{<<author>>}~~~{\footnotesize{<<affiliation>>}}}
-\vspace{10pt}
-
+\vspace{-10pt}
 \begin{multicols}{2}
 \input{.build/main.tex}
-\end{multicols}
 
-
-\pagebreak
-\begin{multicols}{2}
+\begingroup
+\setlength\bibitemsep{0pt}
 \printbibliography
+\endgroup
 \end{multicols}
 
 

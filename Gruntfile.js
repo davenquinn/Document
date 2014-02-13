@@ -12,8 +12,9 @@ module.exports = function (grunt) {
         doc: grunt.file.readJSON('document/config.json'),
         exec: {
             text: {
+                // before even going to theme, replace things from within text files
                 cmd: function() {
-                    return 'components/scripts/figures.py document/text/main.md | pandoc -t latex --natbib -o .build/main.tex';
+                    return 'components/scripts/figures.py document/text/main.md | pandoc -t latex --biblatex -o .build/main.tex';
                 }
             },
             bib: {
@@ -34,7 +35,7 @@ module.exports = function (grunt) {
             },
             move: {
                 cmd: function() {
-                    return "mv .build/texput.pdf dist/final.pdf";
+                    return "mv .build/skeleton.pdf dist/final.pdf";
                 }
             }
         }
