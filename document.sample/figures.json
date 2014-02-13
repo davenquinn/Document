@@ -1,0 +1,21 @@
+[
+	{
+		"image": "Brothers2009_Fig2.pdf",
+		"caption": "The current geometry of spreading in the Salton Sea trough. Motion is concentrated on the Imperial-Fault---San Andreas Fault stepover, with the San Jacinto Fault less active. Generalized areas of divergence are shown as blue boxes. Simplified from \\textcite{Brothers2009} Figure 2.",
+		"width": "0.5\\textwidth",
+		"id": "faults"
+	},
+	{
+		"image": "Jacobson2010_Fig1.pdf",
+		"caption": "",
+		"width": "0.5\\textwidth",
+		"id": "basement",
+		"pos": "l"
+	},
+	{
+		"image": "regional_map.jpg",
+		"caption": "from \\textrm{http://quakeinfo.ucsd.edu/}",
+		"width": "0.5\\textwidth",
+		"id": "regional_map"
+	}
+]
