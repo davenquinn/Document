@@ -1,5 +1,4 @@
 // Generated on 2013-11-11 using generator-webapp 0.4.4
-'use strict';
 
 module.exports = function (grunt) {
     // show elapsed time at the end
@@ -7,25 +6,30 @@ module.exports = function (grunt) {
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
 
+    var options = grunt.file.readJSON('document/config.json')
+
     grunt.initConfig({
         // configurable paths
-        doc: grunt.file.readJSON('document/config.json'),
+        doc: options,
         exec: {
             text: {
                 // before even going to theme, replace things from within text files
                 cmd: function() {
-                    return 'components/scripts/figures.py document/text/main.md | pandoc -t latex --biblatex -o .build/main.tex';
+                    if (options.cite_backend == "biber") {t = "--biblatex"}
+                    else {t = "--natbib"}
+                    console.log(t)
+                    return 'components/scripts/figures.py document/text/main.md | pandoc -t latex '+t+' -o .build/main.tex';
                 }
             },
             bib: {
                 cmd: function() {
-                    return "biber .build/skeleton";
-                    //return "bibtex8 .build/skeleton.aux"
+                    if (options.cite_backend == "biber") {return "biber .build/skeleton";}
+                    else { return "bibtex8 .build/skeleton.aux"}
                 }
             },
             preprocess: {
                 cmd: function() {
-                    return "components/scripts/replace.py components/lib/naturelike/latex/skeleton.tex > .build/skeleton.tex"
+                    return "components/scripts/replace.py components/lib/"+options.theme+"/latex/skeleton.tex > .build/skeleton.tex"
                 }
             },
             latex: {
@@ -35,7 +39,7 @@ module.exports = function (grunt) {
             },
             move: {
                 cmd: function() {
-                    return "mv .build/skeleton.pdf dist/final.pdf";
+                    return "mv .build/skeleton.pdf dist/"+options.filename;
                 }
             }
         }

@@ -1,0 +1,76 @@
+\documentclass[letterpaper,12pt]{article}
+
+\usepackage[paper=letterpaper, margin=1in, nohead, pdftex]{geometry}
+\usepackage{fontspec}
+\usepackage{textcomp}
+\usepackage[small,compact]{titlesec}
+\usepackage{graphicx}			% Nice graphics, optional
+\usepackage{siunitx}
+\usepackage[version=3]{mhchem}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{ifthen}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{paralist}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{setspace}
+\usepackage[font={footnotesize}]{caption}
+
+\input{components/lib/lpsc/latex/includes/fonts.tex}
+
+%\setsansfont{Helvetica Neue}
+
+
+
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+
+\input{components/lib/lpsc/latex/includes/biblatex.tex}
+\addbibresource{<<references>>}
+
+\input{components/lib/lpsc/latex/includes/commands.tex}
+
+
+\setcounter{secnumdepth}{-1}
+% suck up extra white space
+
+\titleformat{\section}{\bfseries}{\thesection}{0pt}{}
+\titleformat{\subsection}[runin]{\small\bfseries}{\thesubsection}{0pt}{}
+\titleformat{\subsubsection}[runin]{\small\bfseries}{\thesubsubsection}{0pt}{}
+
+
+\renewcommand{\bibfont}{\footnotesize}
+
+\defbibenvironment{bibliography}
+  {\noindent}
+  {\unspace}
+  {\printtext[labelnumberwidth]{%
+    \printfield{prefixnumber}%
+    \printfield{labelnumber}}
+    \addspace}
+\renewbibmacro*{finentry}{\finentry\addspace}
+
+
+\setcounter{secnumdepth}{-1}
+\setlength{\parsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{0pt}
+
+\begin{document}
+
+\noindent{\textbf{<<title>>}}~~~\textmd{\small{<<author>>}}~~~\footnotesize{<<affiliation>>}
+\vspace{-5pt}
+\begin{multicols}{2}
+\small
+\input{.build/main.tex}
+
+\begingroup
+\setlength\bibitemsep{0pt}
+\printbibliography
+\endgroup
+\end{multicols}
+
+\end{document}
+

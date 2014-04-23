@@ -6,3 +6,4 @@ dist
 *.log
 node_modules
 data
+.DS_Store
