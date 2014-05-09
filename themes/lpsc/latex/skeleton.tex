@@ -18,58 +18,59 @@
 \usepackage{setspace}
 \usepackage[font={footnotesize}]{caption}
 
-\input{components/lib/lpsc/latex/includes/fonts.tex}
+\input{<<theme_dir>>/latex/includes/fonts.tex}
 
-%\setsansfont{Helvetica Neue}
-
-
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
 
 \defaultfontfeatures{Ligatures=TeX}
 \setmainfont{Times New Roman}
 
-\input{components/lib/lpsc/latex/includes/biblatex.tex}
+\input{<<theme_dir>>/latex/includes/biblatex.tex}
 \addbibresource{<<references>>}
 
-\input{components/lib/lpsc/latex/includes/commands.tex}
+\input{<<theme_dir>>/latex/includes/commands.tex}
 
 
 \setcounter{secnumdepth}{-1}
 % suck up extra white space
 
-\titleformat{\section}{\bfseries}{\thesection}{0pt}{}
-\titleformat{\subsection}[runin]{\small\bfseries}{\thesubsection}{0pt}{}
-\titleformat{\subsubsection}[runin]{\small\bfseries}{\thesubsubsection}{0pt}{}
+\titlespacing{\part}{0pt}{*0}{2ex}
+\titlespacing{\section}{0pt}{0pt}{1ex}
+\titlespacing{\subsection}{0pt}{2pt}{1ex}
+\titlespacing{\subsubsection}{0pt}{*0}{1ex}
 
+% \titleformat{<command>}[<shape>]{<format>}{<label>}{<sep>}{<before-code>}[<after-code>]
 
-\renewcommand{\bibfont}{\footnotesize}
+\titleformat{\section}[runin]{\small\bfseries}{\thesection}{6pt}{}[:]
+\titleformat{\subsection}[runin]{\small\bfseries}{\thesubsection}{3pt}{}[:]
 
-\defbibenvironment{bibliography}
-  {\noindent}
-  {\unspace}
-  {\printtext[labelnumberwidth]{%
-    \printfield{prefixnumber}%
-    \printfield{labelnumber}}
-    \addspace}
-\renewbibmacro*{finentry}{\finentry\addspace}
-
-
-\setcounter{secnumdepth}{-1}
-\setlength{\parsep}{0pt}
+% suck up extra white space
 \setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\headsep}{-5pt}
+\setlength{\topskip}{0pt}
+\setlength{\topmargin}{0pt}
+\setlength{\topsep}{0pt}
 \setlength{\partopsep}{0pt}
+\setlength\bibitemsep{0pt}
+
+%\titleformat{\section}{\bfseries}{\thesection}{0pt}{}
+%\titleformat{\subsection}[runin]{\small\bfseries}{\thesubsection}{0pt}{}
+%\titleformat{\subsubsection}[runin]{\small\bfseries}{\thesubsubsection}{0pt}{}
 
 \begin{document}
 
-\noindent{\textbf{<<title>>}}~~~\textmd{\small{<<author>>}}~~~\footnotesize{<<affiliation>>}
-\vspace{-5pt}
+\noindent{\small\textbf{<<title>>}}~~~\textmd{\small{<<author>>}}~~~\footnotesize{<<affiliation>>}
+\vspace{-14pt}
 \begin{multicols}{2}
 \small
 \input{.build/main.tex}
 
-\begingroup
-\setlength\bibitemsep{0pt}
+\footnotesize
 \printbibliography
-\endgroup
+
 \end{multicols}
 
 \end{document}

@@ -88,13 +88,13 @@
 
 
 
-\begin{document}
-
-\section{<<title>>}
-\textmd{\small{<<author>>}}~~~\footnotesize{
-	<<affiliation>>}
-\vspace{-15pt}
-\begin{multicols}{2}
+\begin[twocolumn]{document}
+\twocolumn[
+	\section{<<title>>}
+	\textmd{\small{<<author>>}}~~~\footnotesize{
+		<<affiliation>>}
+	\vspace{-15pt}]
+%\begin{multicols}{2}
 \small
 
 \input{.build/main.tex}
@@ -102,7 +102,7 @@
 \bibliography{<<references>>}
 \bibliographystyle{components/lib/lpsc/cite_styles/minimal}
 
-\end{multicols}
+%\end{multicols}
 
 \end{document}
 

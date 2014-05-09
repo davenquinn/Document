@@ -1,0 +1,89 @@
+#!/usr/bin/env python
+"""
+I compile your document from a hopeless amalgam of TeX and text.
+
+Usage: compile [-v]
+
+Options:
+-v --verbose  I will go the extra mile to inform you what I'm doing.
+
+"""
+
+import os
+import subprocess
+import docopt
+import json
+import pypandoc
+import codecs
+
+from library.util import command
+from library.figures import replace_figures
+from library.replace import replace_data
+from library.hooks import hooks
+
+with open('document/config.json') as f:
+	document_options = json.load(f)
+
+theme = document_options["theme"]
+theme_dir = os.path.join("themes",theme)
+
+with open(os.path.join(theme_dir,'config.json')) as f:
+	options = json.load(f)
+
+import imp
+
+theme_hooks = imp.load_source('theme_hooks', os.path.join(theme_dir,"hooks.py"))
+hooks.update(theme_hooks.hooks)
+
+options.update(document_options)
+options["theme_dir"] = theme_dir
+
+options = hooks["extend_options"](options)
+
+def run(cmd):
+	return subprocess.call(cmd, shell=True)#, stdout=open(os.devnull,"w"))
+
+def make_bodytext():
+
+	if options["cite_backend"] == "biber": option = "--biblatex"
+	else: option = "--natbib"
+
+	run("pandoc -t latex "+option+" -o .build/main.initial.tex document/text/main.md")
+
+	output = replace_figures(".build/main.initial.tex",options)
+
+	fn = ".build/main.tex"
+	with codecs.open(fn,"w","utf-8") as f:
+		f.write(output)
+
+	fn = os.path.splitext(options["filename"])[0].replace(" ","\ ")+".bodytext.docx"
+	cmd = "pandoc -t docx -o dist/{0} document/text/main.md".format(fn)
+	print cmd
+	run(cmd)
+
+def prepare_skeleton():
+	fn = os.path.join(theme_dir, "latex","skeleton.tex")
+	with open(".build/skeleton.tex","w") as f:
+		f.write(replace_data(fn, options))
+
+def make_bibliography():
+	if options["cite_backend"] == "biber":
+		run("biber .build/skeleton")
+	else:
+		run("bibtex8 .build/skeleton.aux")
+	hooks["post_make_bibliography"](options)
+
+def make_pdf():
+	run("xelatex -output-directory .build .build/skeleton.tex")
+	run("gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=.build/skeleton.small.pdf .build/skeleton.pdf")
+
+def copy_file():
+	os.rename(".build/skeleton.pdf", "dist/"+options["filename"])
+
+if __name__ == "__main__":
+	make_bodytext()
+	prepare_skeleton()
+	make_pdf()
+	make_bibliography()
+	make_pdf()
+	copy_file()
